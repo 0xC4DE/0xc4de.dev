@@ -28,7 +28,7 @@ twitter_username: "NotComptia"
 github_username:  "0xc4de"
 
 # Build settings
-theme: no-style-please
+remote_theme: no-style-please
 plugins:
   - jekyll-feed
 
