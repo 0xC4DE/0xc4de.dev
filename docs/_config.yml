@@ -24,8 +24,8 @@ description: >- # this means to ignore newlines until "baseurl:"
   Blog/Writeup host for 0xc4de. A developer based out of Huntsville, Alabama
 baseurl: "/blog" # the subpath of your site, e.g. /blog
 url: http://0xc4de.dev # the base hostname & protocol for your site, e.g. http://example.com
-twitter_username: NotComptia
-github_username:  0xc4de
+twitter_username: "NotComptia"
+github_username:  "0xc4de"
 
 # Build settings
 theme: minima
