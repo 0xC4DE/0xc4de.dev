@@ -14,7 +14,10 @@
   <ul>
     {%- for post in posts -%}
         <li>
-	  {%- if post.show_date -%}
+	  {%- if post.category == "blog" -%}
+	  <span>{{- post.date | date: site.theme_config.date_format -}}</span>
+          <a href="{{ post.url | relative_url }}">{{ post.title | downcase }}</a>
+	  {%- else -%}
           <a href="{{ post.url | relative_url }}">{{ post.title | downcase }}</a>
 	  {%- endif -%}
         </li>
