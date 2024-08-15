@@ -29,6 +29,7 @@ github_username:  "0xc4de"
 
 # Build settings
 remote_theme: riggraz/no-style-please
+theme: no-style-please
 plugins:
   - jekyll-feed
 
