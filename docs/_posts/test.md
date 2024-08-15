@@ -1,6 +1,6 @@
 ---
 layout: post
-category: CTF Writeups
+category: writeups
 permalink: /writeups
 ---
 
