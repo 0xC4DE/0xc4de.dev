@@ -1,0 +1,5 @@
+entries:
+  - title: CTF Writeups
+    post_list:
+      show_more:  true
+      show_more_url: writeup.html
