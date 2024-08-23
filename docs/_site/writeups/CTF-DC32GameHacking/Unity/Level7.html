@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>Level 7</title><!-- Begin Jekyll SEO tag v2.7.1 -->
+<meta name="generator" content="Jekyll v3.9.5" />
+<meta property="og:title" content="Level 7" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Level 7 Immediately after entering Level 7 I am told that I’m cheating! The agony! The horror!" />
+<meta property="og:description" content="Level 7 Immediately after entering Level 7 I am told that I’m cheating! The agony! The horror!" />
+<link rel="canonical" href="http://localhost:4000/writeups/CTF-DC32GameHacking/Unity/Level7.html" />
+<meta property="og:url" content="http://localhost:4000/writeups/CTF-DC32GameHacking/Unity/Level7.html" />
+<meta property="og:site_name" content="0xc4de.dev" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Level 7" />
+<script type="application/ld+json">
+{"url":"http://localhost:4000/writeups/CTF-DC32GameHacking/Unity/Level7.html","headline":"Level 7","@type":"WebPage","description":"Level 7 Immediately after entering Level 7 I am told that I’m cheating! The agony! The horror!","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="0xc4de.dev" /><link rel="shortcut icon" type="image/x-icon" href="" />
+  <link rel="stylesheet" href="/assets/css/main.css" />
+</head><body a="auto">
+    <main class="page-content" aria-label="Content">
+      <div class="w">
+        <h1 id="level-7">Level 7</h1>
+<p>Immediately after entering Level 7 I am told that I’m cheating! The agony! The horror!
+<img src="Images/Pasted image 20240820222107.png" alt="Image" /></p>
+
+<p>Well the game crashed itself, so that saves me a step at least.</p>
+
+<p>Immediately I go into DNSpy to see what this “anticheat” is really doing, which is found in the “anticheat” script/class.</p>
+
+<p>Looks like there’s some CodeHash checking &amp; a list of “known cheat tools”
+<img src="Images/Pasted image 20240820222227.png" alt="Image" /></p>
+
+<p>Normally, I’d just wipe these out, but I think I can do one more better.</p>
+
+<p>If you didn’t know the Unity <code class="language-plaintext highlighter-rouge">MonoBehavior</code> scripts rely on a set of built in methods that the Unity engine looks for to do things by itself, <code class="language-plaintext highlighter-rouge">Start</code> and <code class="language-plaintext highlighter-rouge">Update</code> being some of the most used. without these methods, other scripts would have to call out to an instantiated <code class="language-plaintext highlighter-rouge">GameObject</code> containing the script as a component. This means our anticheat script will more than likely be rendered useless by simply removing any <code class="language-plaintext highlighter-rouge">MonoBehavior</code> methods that it may use, so I wipe out <code class="language-plaintext highlighter-rouge">Start</code> and <code class="language-plaintext highlighter-rouge">Update</code>. This approach assumes that the <code class="language-plaintext highlighter-rouge">anticheat</code> class/script relies solely on itself, however.</p>
+
+<p>After doing that, I just relaunch the game and finally get to look at the stage.</p>
+
+<p><img src="Images/Pasted image 20240820222842.png" alt="Image" /></p>
+
+<p>Sweet! Now lets play the game and find out what this is.</p>
+
+<p><img src="Images/Level7Game.gif" alt="Image" /></p>
+
+<p>Turns out I am not that fast at shooting, I’m not sure you’re intended to even do that yourself! Well at least I know now the game is pretty much Wac-a-mole. Which reminded me of a script I saw in DNSpy! <code class="language-plaintext highlighter-rouge">wackamole</code></p>
+
+<p>This one is quite long, the most notable pieces being a little method called <code class="language-plaintext highlighter-rouge">CheckWin</code> It seems like you have to hit <em>every</em> mole to win, preposterous! Lets even out the odds.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>if (this.spawnCount == this.killCount &amp;&amp; this.spawnCount != 0)
+</code></pre></div></div>
+<p>Changed to</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>if (true)
+</code></pre></div></div>
+
+<p>That should do the trick!</p>
+
+<p><img src="Images/Level7GameComplete.gif" alt="Image" /></p>
+
+<p>Well that was fun, lets pick up the flag:</p>
+
+<p><code class="language-plaintext highlighter-rouge">GHCTF{nice_shooting_tex}</code></p>
+
+<p>and continue to <a href="Level8">Level 8</a></p>
+
+<p>Note: I did hear a fun/novel solution would be to create a little aimbot that can do this for you, that was way beyond my depth (still kind of is!) and would require creating scripts. I opted for the easy road.</p>
+
+      </div>
+    </main>
+  </body>
+</html>

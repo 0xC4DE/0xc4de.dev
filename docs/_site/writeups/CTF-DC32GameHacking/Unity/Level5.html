@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>Level 5</title><!-- Begin Jekyll SEO tag v2.7.1 -->
+<meta name="generator" content="Jekyll v3.9.5" />
+<meta property="og:title" content="Level 5" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Level 5 Level 5 is the first level where I looked at it and immediately knew I had to do something different." />
+<meta property="og:description" content="Level 5 Level 5 is the first level where I looked at it and immediately knew I had to do something different." />
+<link rel="canonical" href="http://localhost:4000/writeups/CTF-DC32GameHacking/Unity/Level5.html" />
+<meta property="og:url" content="http://localhost:4000/writeups/CTF-DC32GameHacking/Unity/Level5.html" />
+<meta property="og:site_name" content="0xc4de.dev" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Level 5" />
+<script type="application/ld+json">
+{"url":"http://localhost:4000/writeups/CTF-DC32GameHacking/Unity/Level5.html","headline":"Level 5","@type":"WebPage","description":"Level 5 Level 5 is the first level where I looked at it and immediately knew I had to do something different.","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="0xc4de.dev" /><link rel="shortcut icon" type="image/x-icon" href="" />
+  <link rel="stylesheet" href="/assets/css/main.css" />
+</head><body a="auto">
+    <main class="page-content" aria-label="Content">
+      <div class="w">
+        <h1 id="level-5">Level 5</h1>
+<p>Level 5 is the first level where I looked at it and immediately knew I had to do something different.</p>
+
+<p>Probably because of the big red kill box, but IDK you tell me</p>
+
+<p><img src="Images/Pasted image 20240820215450.png" alt="Image" /></p>
+
+<p>The hint said to use DNSpy, so away I went.</p>
+
+<p>Now I didn’t know this before but, it’s extremely important to use the correct version (64 bit or 32 bit) of DNSpy for the application you’re trying to modify. I spent at least an hour figuring out why the 64 bit version just wasn’t handling it. It’s a learning experience they say…</p>
+
+<p>After loading up the 32 bit version of DNSpy, I just loaded the Unity.exe, because I figured “That’s where scripts are stored right?” That was not right. After some light googling and finding a <a href="https://www.youtube.com/watch?v=-7dW3Cfn2O8">video</a> on quite a strange game, I determined you’re supposed to use the “Assembly-CSharp.dll” to peek and edit scripts.</p>
+
+<p>Here’s a picture of DNSpy when you load it in properly. Get familiar with it, I will be using it much more in these writeups.
+<img src="Images/Pasted image 20240820215847.png" alt="Image" /></p>
+
+<p>Immediately notice the scripts on the left. There’s some intriguing things such as “HasFish” “KillFloor” “L9_timer” “LazerTurret” and “PitFall”.</p>
+
+<p>This is where I learned I could have made the Pitfall from Level 4 not even fall! The horror!</p>
+
+<p>Well, the lesson here was not lost, at this point, I just needed to look at little harder at what happens when the character does die, the turret shoots you, aha! That’s going to be what I go for next.</p>
+
+<p>So “LazerTurret” looks like this:
+<img src="Images/Pasted image 20240820221136.png" alt="Image" /></p>
+
+<p>Notice the “FireLazer”, maybe I can just, turn that off. By making it <code class="language-plaintext highlighter-rouge">return</code>
+<img src="Images/Pasted image 20240820221406.png" alt="Image" /></p>
+
+<p>From here I’m sure you know the drill by now, I walk into the box, dont die, and collect the flag:</p>
+
+<p><code class="language-plaintext highlighter-rouge">GHCTF{OK_now_you_have_godmode}</code></p>
+
+<p>And I can continue to <a href="Level6">Level 6</a></p>
+
+
+      </div>
+    </main>
+  </body>
+</html>

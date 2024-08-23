@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>Level 9</title><!-- Begin Jekyll SEO tag v2.7.1 -->
+<meta name="generator" content="Jekyll v3.9.5" />
+<meta property="og:title" content="Level 9" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Level 9 Level 9 is a little race track, as explained by the horse, you have 10 seconds to get to the other side, and there is no way to beat it going “Normal speed”. Now there’s a few ways to tackle this. I chose what I thought was the most interesting: “Dont die when the game says you “need to”." />
+<meta property="og:description" content="Level 9 Level 9 is a little race track, as explained by the horse, you have 10 seconds to get to the other side, and there is no way to beat it going “Normal speed”. Now there’s a few ways to tackle this. I chose what I thought was the most interesting: “Dont die when the game says you “need to”." />
+<link rel="canonical" href="http://localhost:4000/writeups/CTF-DC32GameHacking/Unity/Level9.html" />
+<meta property="og:url" content="http://localhost:4000/writeups/CTF-DC32GameHacking/Unity/Level9.html" />
+<meta property="og:site_name" content="0xc4de.dev" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Level 9" />
+<script type="application/ld+json">
+{"url":"http://localhost:4000/writeups/CTF-DC32GameHacking/Unity/Level9.html","headline":"Level 9","@type":"WebPage","description":"Level 9 Level 9 is a little race track, as explained by the horse, you have 10 seconds to get to the other side, and there is no way to beat it going “Normal speed”. Now there’s a few ways to tackle this. I chose what I thought was the most interesting: “Dont die when the game says you “need to”.","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="0xc4de.dev" /><link rel="shortcut icon" type="image/x-icon" href="" />
+  <link rel="stylesheet" href="/assets/css/main.css" />
+</head><body a="auto">
+    <main class="page-content" aria-label="Content">
+      <div class="w">
+        <h1 id="level-9">Level 9</h1>
+<p>Level 9 is a little race track, as explained by the horse, you have 10 seconds to get to the other side, and there is no way to beat it going “Normal speed”.
+<img src="Images/Pasted image 20240820232714.png" alt="Image" />
+Now there’s a few ways to tackle this. I chose what I thought was the most interesting: “Dont die when the game says you “need to”.</p>
+
+<p>to do this, I re-opened DNSpy and quickly located <code class="language-plaintext highlighter-rouge">l9_finish</code> and <code class="language-plaintext highlighter-rouge">l9_timer</code></p>
+
+<p>Starting with <code class="language-plaintext highlighter-rouge">l9_time</code>, I quickly spotted the “KillPlayer” trigger in <code class="language-plaintext highlighter-rouge">trigger_game_end</code>
+So I just made it not do that</p>
+<pre><code class="language-C#">private void trigger_game_end() { 
+    MMGameEvent.Trigger("KillPlayer");
+}
+</code></pre>
+
+<pre><code class="language-C#">private void trigger_game_end() { 
+    return;
+}
+</code></pre>
+
+<p>I figured that probably wouldn’t be enough, and took a quick look at <code class="language-plaintext highlighter-rouge">l9_finish</code> Immediately there’s a few methods that seem to just count coins, and compare them to if you’ve got them all. That’s a lot of hooplah. Lets just modify <code class="language-plaintext highlighter-rouge">OnTriggerEnter</code> to always spawn the flag.</p>
+<pre><code class="language-C#">public partial class l9_finish : MonoBehaviour
+{
+	private void OnTriggerEnter(Collider other)
+	{
+		if (other.CompareTag("Player"))
+		{
+			if (this.gameOver)
+			{
+				return;
+			}
+			if (!this.checkGameEndRequirements())
+			{
+				MMGameEvent.Trigger("KillPlayer");
+			}
+			this.completionFeedbacks.PlayFeedbacks();
+			this.gameOver = true;
+			UnityEngine.Object.Instantiate&lt;GameObject&gt;(this.speedFlag, base.transform.position, Quaternion.identity);
+		}
+	}
+}
+</code></pre>
+<p>Turns into</p>
+<pre><code class="language-C#">public partial class l9_finish : MonoBehaviour
+{
+	private void OnTriggerEnter(Collider other)
+	{
+		if (other.CompareTag("Player"))
+		{
+			UnityEngine.Object.Instantiate&lt;GameObject&gt;(this.speedFlag, base.transform.position, Quaternion.identity);
+		}
+	}
+}
+</code></pre>
+
+<p>After these quite easy changes, which were just removing code, I should be good to take a brisk walk to the finish.
+<img src="Images/Pasted image 20240820232558.png" alt="Image" />
+This flag also doesn’t disappear for whatever reason, whatever!</p>
+
+<p><code class="language-plaintext highlighter-rouge">GHCTF{zoom_zoom_money_maker}</code></p>
+
+<p>Now all the levels are done, right? <a href="Level10">Level10</a></p>
+
+<p>Another Note: The intended solution is a speedhack. You can do this in the inspector by finding your “PoCChar” (Proof of Concept Character) which is your actual character, and inspecting it, then going into <code class="language-plaintext highlighter-rouge">MoreMountains.TopDownEngine.CharacterRun</code> (It’s more controllable if you do run) then changing the value of <code class="language-plaintext highlighter-rouge">CharacterRun.RunSpeed</code> to just like, a high number, after doing this, just run the track! Remember to press shift!</p>
+
+      </div>
+    </main>
+  </body>
+</html>

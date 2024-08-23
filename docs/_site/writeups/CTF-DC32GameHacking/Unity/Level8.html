@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>Level 8</title><!-- Begin Jekyll SEO tag v2.7.1 -->
+<meta name="generator" content="Jekyll v3.9.5" />
+<meta property="og:title" content="Level 8" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Level 8 Jumping into Level 8 You’re given a chest, you press E on it, and you get an item. Presumably there’s a really low chance you get the key maybe flag, but I’m not THAT lucky, now am I?" />
+<meta property="og:description" content="Level 8 Jumping into Level 8 You’re given a chest, you press E on it, and you get an item. Presumably there’s a really low chance you get the key maybe flag, but I’m not THAT lucky, now am I?" />
+<link rel="canonical" href="http://localhost:4000/writeups/CTF-DC32GameHacking/Unity/Level8.html" />
+<meta property="og:url" content="http://localhost:4000/writeups/CTF-DC32GameHacking/Unity/Level8.html" />
+<meta property="og:site_name" content="0xc4de.dev" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Level 8" />
+<script type="application/ld+json">
+{"url":"http://localhost:4000/writeups/CTF-DC32GameHacking/Unity/Level8.html","headline":"Level 8","@type":"WebPage","description":"Level 8 Jumping into Level 8 You’re given a chest, you press E on it, and you get an item. Presumably there’s a really low chance you get the key maybe flag, but I’m not THAT lucky, now am I?","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="0xc4de.dev" /><link rel="shortcut icon" type="image/x-icon" href="" />
+  <link rel="stylesheet" href="/assets/css/main.css" />
+</head><body a="auto">
+    <main class="page-content" aria-label="Content">
+      <div class="w">
+        <h1 id="level-8">Level 8</h1>
+<p>Jumping into Level 8 You’re given a chest, you press E on it, and you get an item. Presumably there’s a really low chance you get the key maybe flag, but I’m not THAT lucky, now am I?</p>
+
+<p><img src="Images/Level8Chest.gif" alt="Image" /></p>
+
+<p>This level stumped me for the longest time, there was no real method in DNSpy that coordinated to the chest’s spawning logic, so I figured that anything that needed to be edited in the game. This was the perfect opportunity to explore “MelonLoader” which was listed in the provided guides as something useful.</p>
+
+<p>Now since the game is definitely, 100% 32 bit, the 32 bit melon loader is required. (I made this mistake at least once)</p>
+
+<p>To install, simply drag+drop the contents of <code class="language-plaintext highlighter-rouge">MelonLoader...zip</code> into the Games directory.</p>
+
+<p>It’s notable that MelonLoader is not really useful on its own, it loads mods, that’s about all it does. So what mod would be useful? <a href="https://github.com/sinai-dev/UnityExplorer/releases">Unity Explorer</a> This is also listed in the hints, but I completely missed it at the time and found it myself (go figure).</p>
+
+<p>To install UnityExplorer I grabbed the “UnityExplorer.MelonLoader.Mono.zip” and did the same thing to install melon loader, drag+drop!</p>
+
+<p>With all of that inside of the directory, I launch the game and go straight to level 8 to dig around.</p>
+
+<p>Now if you’ve used Unity before to create a game, the UnityExplorer windows should be somewhat familiar, a list of objects, a log, etc.</p>
+
+<p>I’m going to quickly branch off here and show off the Intended solution, I find it much more enjoyable, as the Unintended solution is quite lame in comparison.</p>
+<h2 id="intended-solution">Intended Solution</h2>
+
+<p>What’s most interesting is the chest. so search for it, and notice the <code class="language-plaintext highlighter-rouge">lottery_check</code> and <code class="language-plaintext highlighter-rouge">MoreMountains.TopDownEngine.Loot</code> and finally <code class="language-plaintext highlighter-rouge">MoreMountains.TopDownEngine.ButtonActivatedZone</code>
+<img src="Images/Pasted image 20240820224819.png" alt="Image" />
+<img src="Images/Pasted image 20240820225054.png" alt="Image" /></p>
+
+<p>The loot function might be what I want, as well as <code class="language-plaintext highlighter-rouge">lottery_check</code>. It’s notable that <code class="language-plaintext highlighter-rouge">ButtonActivatedZone</code> is a helper component that determines if the player is in the zone to even hit the button, neat!</p>
+
+<p>Quickly inside of <code class="language-plaintext highlighter-rouge">Loot</code> I noticed the <code class="language-plaintext highlighter-rouge">Loot.LootTable</code> but more importantly <code class="language-plaintext highlighter-rouge">Loot.LootTableSO</code>. The distinction is important, since I want to follow <code class="language-plaintext highlighter-rouge">LootTableSO</code>-&gt;<code class="language-plaintext highlighter-rouge">LootTable</code>-&gt;<code class="language-plaintext highlighter-rouge">ObjectsToLoot</code>
+<img src="Images/Pasted image 20240820225755.png" alt="Image" />
+<img src="Images/Pasted image 20240820225903.png" alt="Image" />
+<img src="Images/Pasted image 20240820225936.png" alt="Image" /></p>
+
+<p>Now with all of these objects listed I inspect them one by one until I find one at index 3 with the <code class="language-plaintext highlighter-rouge">Loot</code> attribute equal to <code class="language-plaintext highlighter-rouge">LotteryFlag</code>. That’s interesting, I should be able to spawn it by Copy/Paste-ing it over, with a <code class="language-plaintext highlighter-rouge">weight</code> of a very large number, a <code class="language-plaintext highlighter-rouge">ChancePercentage</code> of 100, and <code class="language-plaintext highlighter-rouge">RangeFrom</code> =0</p>
+
+<p>With all that done, the flag will spawn almost guaranteed around the chest, just give it a grab (remember to close UnityExplorer with F7, or the flag will be encoded while still inside of your game!)</p>
+
+<p>This reveals the flag:</p>
+
+<p><code class="language-plaintext highlighter-rouge">GHCTF{wow_wow_lucky_pull}</code></p>
+
+<p>Now I can continue to the Final(?) <a href="Level9">Level 9</a></p>
+
+<h2 id="unintended-solution-forbidden-strategy">Unintended Solution (forbidden strategy)</h2>
+
+<p>Confession, I didn’t get the intended solution from this particular level, I had to ask the creator, yes the intended solution is to have the chest spawn the flag by modifying the loot tables. That is actually super cool. But this is the level where I discovered the most tragic truth about Unity: Any object that needs to exist in a scene, already exists.</p>
+
+<p>What does this mean? It means with Unity Explorer you can create any <code class="language-plaintext highlighter-rouge">GameObject</code> that exists within the scene already, whether or not it’s active.</p>
+
+<p>So how do you do this?</p>
+
+<p>Open unity explorer, go to the little “Object Search” button in the Object Explorer
+<img src="Images/Pasted image 20240820231459.png" alt="Image" /></p>
+
+<p>Next search for a <code class="language-plaintext highlighter-rouge">UnityObject</code>, and for Name contains put: <code class="language-plaintext highlighter-rouge">flag</code>
+<img src="Images/Pasted image 20240820231527.png" alt="Image" />
+Immediately multiple things appear, LotteryFlag being the obvious choice.</p>
+
+<p>You can now spawn the one with Type <code class="language-plaintext highlighter-rouge">UnityEngine.GameObject</code> by double clicking it and clicking “Instantiate”
+<img src="Images/Pasted image 20240820231632.png" alt="Image" />
+and there it is.</p>
+
+<p>Now why is this forbidden? Well, simply put, this can be done in <strong><em>any</em></strong> of the levels. Yep. any of them. Repeat the steps, maybe even add <code class="language-plaintext highlighter-rouge">Unity.GameObject</code> to the filter to make it even more slim, and you’ll immediately notice each flag can simply be spawned and picked up. I think this ruins the fun, so congratulations on reading this, the forbidden knowledge is now yours. To be fair during the competition, I don’t think many (or any?) players abused this, mostly because it wasn’t their first thought to download Unity Explorer and do it. If anything from this point onwards, they used it.</p>
+
+      </div>
+    </main>
+  </body>
+</html>

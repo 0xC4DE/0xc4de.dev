@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>Level 2</title><!-- Begin Jekyll SEO tag v2.7.1 -->
+<meta name="generator" content="Jekyll v3.9.5" />
+<meta property="og:title" content="Level 2" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Level 2 Level 2 starts off a lot more barren than level 1. You drop down the pipe and meet what’s going to be our best friend for the rest of this game, the Unicorn floatie!" />
+<meta property="og:description" content="Level 2 Level 2 starts off a lot more barren than level 1. You drop down the pipe and meet what’s going to be our best friend for the rest of this game, the Unicorn floatie!" />
+<link rel="canonical" href="http://localhost:4000/writeups/CTF-DC32GameHacking/Unity/Level2.html" />
+<meta property="og:url" content="http://localhost:4000/writeups/CTF-DC32GameHacking/Unity/Level2.html" />
+<meta property="og:site_name" content="0xc4de.dev" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Level 2" />
+<script type="application/ld+json">
+{"url":"http://localhost:4000/writeups/CTF-DC32GameHacking/Unity/Level2.html","headline":"Level 2","@type":"WebPage","description":"Level 2 Level 2 starts off a lot more barren than level 1. You drop down the pipe and meet what’s going to be our best friend for the rest of this game, the Unicorn floatie!","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="0xc4de.dev" /><link rel="shortcut icon" type="image/x-icon" href="" />
+  <link rel="stylesheet" href="/assets/css/main.css" />
+</head><body a="auto">
+    <main class="page-content" aria-label="Content">
+      <div class="w">
+        <h1 id="level-2">Level 2</h1>
+<p>Level 2 starts off a lot more barren than level 1. You drop down the pipe and meet what’s going to be our best friend for the rest of this game, the Unicorn floatie!</p>
+
+<p><img src="Images/Level2UnicornIntro.gif" alt="Image" /></p>
+
+<p>Immediately I try running into it to see if I can damage it, before remembering, I have a gun!</p>
+
+<p><img src="Images/Level2Shooting.gif" alt="Image" /></p>
+
+<p>Well that didn’t work out too well either, but I did find out the unicorn drops the flag, and I cannot cheese him by falling off the stage.
+<img src="Images/Pasted image 20240820205857.png" alt="Image" /></p>
+
+<p>As I see it, I need more ammo. Take note of the bottom right hand corner of the game, there’s a little Ammo icon and count, which means it probably, too can be manipulated using Cheat Engine.
+<img src="Images/Pasted image 20240820205940.png" alt="Image" /></p>
+
+<p>Using this information I use Cheat Engine to search for a 4 byte value at 10, then I shot, then again at 9, then shot and again at 8.</p>
+
+<p>This left me with 3 results. So, which one is the ammo count? Don’t know, I’ll just make all 3 the value 55! This allows me to kill the unicorn with plenty to spare.
+<img src="Images/Pasted image 20240820211240.png" alt="Image" /></p>
+
+<p>Finally, collecting the item gives us the following flag:</p>
+
+<p><code class="language-plaintext highlighter-rouge">GHCTF{oops_sorry_mr_unicorn}</code></p>
+
+<p>I can now move on to <a href="Level3">Level 3</a></p>
+
+      </div>
+    </main>
+  </body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>Level 6</title><!-- Begin Jekyll SEO tag v2.7.1 -->
+<meta name="generator" content="Jekyll v3.9.5" />
+<meta property="og:title" content="Level 6" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Level 6 Level 6 starts getting a little weird. There’s a cat statue, an apple and we’re supposed to give a fish." />
+<meta property="og:description" content="Level 6 Level 6 starts getting a little weird. There’s a cat statue, an apple and we’re supposed to give a fish." />
+<link rel="canonical" href="http://localhost:4000/writeups/CTF-DC32GameHacking/Unity/Level6.html" />
+<meta property="og:url" content="http://localhost:4000/writeups/CTF-DC32GameHacking/Unity/Level6.html" />
+<meta property="og:site_name" content="0xc4de.dev" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Level 6" />
+<script type="application/ld+json">
+{"url":"http://localhost:4000/writeups/CTF-DC32GameHacking/Unity/Level6.html","headline":"Level 6","@type":"WebPage","description":"Level 6 Level 6 starts getting a little weird. There’s a cat statue, an apple and we’re supposed to give a fish.","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="0xc4de.dev" /><link rel="shortcut icon" type="image/x-icon" href="" />
+  <link rel="stylesheet" href="/assets/css/main.css" />
+</head><body a="auto">
+    <main class="page-content" aria-label="Content">
+      <div class="w">
+        <h1 id="level-6">Level 6</h1>
+<p>Level 6 starts getting a little weird. There’s a cat statue, an apple and we’re supposed to give a fish.</p>
+
+<p>Well, in the previous problem, using DNSpy, I noticed there’s a script called “HasFish” which sounded like the ideal place to start.
+<img src="Images/Pasted image 20240820221629.png" alt="Image" /></p>
+
+<p>This method is a little busy, but I immediately am able to pick out the most important part:</p>
+
+<pre><code class="language-C#">this.fishItems = this.inventory.InventoryContains("Fish");
+</code></pre>
+
+<p>Well… I have an apple, so what if my inventory contains an apple instead?</p>
+
+<pre><code class="language-C#">this.fishItems = this.inventory.InventoryContains("Apple");
+</code></pre>
+
+<p>I change the script, recompile, and relaunch!
+<img src="Images/Pasted image 20240820221901.png" alt="Image" />
+Tahdah! This gets me the flag, notice how there are some signs at the end of this. When you get near them it says “NO CHEATING ALLOWED BEYOND THIS POINT”.</p>
+
+<p>Wonder what that means.</p>
+
+<p>Anyway, the flag is</p>
+
+<p><code class="language-plaintext highlighter-rouge">GHCTF{Kitty_appreciates_the_fish_magic}</code></p>
+
+<p>and I continue to <a href="Level7">Level 7</a></p>
+
+      </div>
+    </main>
+  </body>
+</html>

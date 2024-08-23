@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>Level 4</title><!-- Begin Jekyll SEO tag v2.7.1 -->
+<meta name="generator" content="Jekyll v3.9.5" />
+<meta property="og:title" content="Level 4" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Level 4 At this point in the competition, I was in a workshop with my Wife, for some ICS topic I did not really care to hear (it was hot and I was bored), so I decided I was going to hack away at this." />
+<meta property="og:description" content="Level 4 At this point in the competition, I was in a workshop with my Wife, for some ICS topic I did not really care to hear (it was hot and I was bored), so I decided I was going to hack away at this." />
+<link rel="canonical" href="http://localhost:4000/writeups/CTF-DC32GameHacking/Unity/Level4.html" />
+<meta property="og:url" content="http://localhost:4000/writeups/CTF-DC32GameHacking/Unity/Level4.html" />
+<meta property="og:site_name" content="0xc4de.dev" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Level 4" />
+<script type="application/ld+json">
+{"url":"http://localhost:4000/writeups/CTF-DC32GameHacking/Unity/Level4.html","headline":"Level 4","@type":"WebPage","description":"Level 4 At this point in the competition, I was in a workshop with my Wife, for some ICS topic I did not really care to hear (it was hot and I was bored), so I decided I was going to hack away at this.","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="0xc4de.dev" /><link rel="shortcut icon" type="image/x-icon" href="" />
+  <link rel="stylesheet" href="/assets/css/main.css" />
+</head><body a="auto">
+    <main class="page-content" aria-label="Content">
+      <div class="w">
+        <h1 id="level-4">Level 4</h1>
+<p>At this point in the competition, I was in a workshop with my Wife, for some ICS topic I did not really care to hear (it was hot and I was bored), so I decided I was going to hack away at this.</p>
+
+<p>The first thing you notice as you enter the level is that the flag is right there! Just go and grab it!</p>
+
+<p><img src="Images/Level4Pitfall.gif" alt="Image" /></p>
+
+<p>… Oh.</p>
+
+<p>Well, One thing to do, escape the pit! The only real way I can discern how to do this is to raise myself above the pit, and put myself back down on the exit area, presumably.</p>
+
+<p>To do that I need one thing, my Z placement in the world. The easiest way to grab, then manipulate that, to me, at the time, was still Cheat Engine.</p>
+
+<p>So I went back to Cheat Engine and started an “Unknown Initial Value” search using the Float type. Note that after hitting “First Scan” nothing will appear because there’s just a bunch of things. To sanitize the next results, I make sure to click “Unchanged Value”, then I move on both X, Y axis (not jumping!) and do that again. Finally comes the real methodology I used:</p>
+
+<ul>
+  <li>(In the game) jump up a step of the stairs in the pit</li>
+  <li>do a “Next Scan” for a “increased value” in cheat engine</li>
+  <li>Repeat the previous two until I get to the top</li>
+  <li>Once I get to the top, drop to the bottom, do a “Decreased value” next scan</li>
+</ul>
+
+<p>Now, after all that, I notice that there’s a <em>lot</em> of values left, about 77 in my example, so how do I determine which one is real? Well I noticed some addresses seemed to still be messy, so I did two things:</p>
+
+<ol>
+  <li>Did a scan for “Exact Value” with NOT selected, and 0</li>
+  <li>Did a scan for “Unchanged Value”</li>
+</ol>
+
+<p>This still left me with 74 values, so what now?</p>
+
+<p>Well on the day of, I simply just changed all of the values to a high number, then positioned myself above the ground, and put them back down to a not so high number! This was a really naive approach that broke multiple things in the game, but it worked!</p>
+
+<p>The real way is to determine the <em>actual</em> value, as follows:</p>
+<ul>
+  <li>Add all of the addresses into the saved addresses</li>
+  <li>Freeze half</li>
+  <li>Try to jump</li>
+  <li>If jump worked, freeze the other half</li>
+  <li>If jump didn’t work right, delete the unfrozen half</li>
+  <li>unfreeze all addresses, go to step 2</li>
+</ul>
+
+<p>doing this I found a float with the value of ~-3 that was my magic number, and when frozen created a really buggy jump/fall sequence.</p>
+
+<p><img src="Images/Pasted image 20240820214836.png" alt="Image" /></p>
+
+<p>This bugginess didn’t matter because all I had to do now was just make myself go up, then move a little to the right, then make myself go down! Luckily the floor is at/around Z=0 (I may have ended up killing my character on one occasion, keep the value frozen!)</p>
+
+<p><img src="Images/Level4Complete.gif" alt="Image" /></p>
+
+<p>With that, the level is complete and can grab my flag</p>
+
+<p><code class="language-plaintext highlighter-rouge">GHCTF{You_should_play_basketball}</code></p>
+
+<p>and move on to <a href="Level5">Level 5</a></p>
+
+<p>After crashing because I forgot to unfreeze some values….</p>
+
+      </div>
+    </main>
+  </body>
+</html>

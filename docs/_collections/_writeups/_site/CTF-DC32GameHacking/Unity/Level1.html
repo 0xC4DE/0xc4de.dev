@@ -1,0 +1,36 @@
+<h1 id="level-1">Level 1</h1>
+<p>Level 1 was the warmup for the entire thing, it’s the first level you launch into when you get into the game. Because I wasn’t sure where to start I took a look at the guide &amp; decided to download Cheat Engine.</p>
+
+<p>However, the first REAL challenge was Windows. I wrestled with Defender for about 20 minutes trying to download Cheat Engine! It continually quarantined CheatEngine.exe until I turned it almost completely off!</p>
+
+<p>Anyhow, getting into level 1 you are told to take the weapon, but it is behind a box with some health attached to it 
+![[Pasted image 20240820203510.png]]</p>
+
+<p>In order to get this box you need to just keep hitting it, so lets see what happens when I do that.
+![[Level1Hurt.gif]]
+Well obviously I’m not going to have enough health, lets get into Cheat Engine to just give myself more!</p>
+
+<p>After restarting the level, I load up Cheat Engine and attaching to the process I run a basic “exact value” search for Float values at 100.</p>
+
+<p>![[Pasted image 20240820204701.png]]</p>
+
+<p>After that, I give it a few and select “Unchanged value” just to help remove clutter, this is a decent practice if you have what I will call a “stable  value” like health.</p>
+
+<p>Now, I get hit, and do another exact value search for 90, Immediately there’s only one result
+![[Pasted image 20240820204845.png]]</p>
+
+<p>Now I double click it, change the value to 1000, and my health immediately updates!
+![[Pasted image 20240820204912.png]]</p>
+
+<p>Lucky me, that turned out to be correct. I can now take damage and pick up the gun.</p>
+
+<p>After doing that the flag spawns above my head, a chime plays, and the exit opens.</p>
+
+<p>![[Pasted image 20240820205217.png]]</p>
+
+<p>collecting the flag with jump (Spacebar) adds it to my inventory and gives me the gun I picked up. I open my inventory with ‘i’, giving me the flag.</p>
+
+<p><code class="language-plaintext highlighter-rouge">GHCTF{this_is_the_first_flag_woot}</code></p>
+
+<p>I can now move on to <a href="Level2.md">Level 2</a></p>
+

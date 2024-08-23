@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>Level 10</title><!-- Begin Jekyll SEO tag v2.7.1 -->
+<meta name="generator" content="Jekyll v3.9.5" />
+<meta property="og:title" content="Level 10" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Level 10 Level 10 is actually the easiest level if you’ve progressed linearly up to this point." />
+<meta property="og:description" content="Level 10 Level 10 is actually the easiest level if you’ve progressed linearly up to this point." />
+<link rel="canonical" href="http://localhost:4000/writeups/CTF-DC32GameHacking/Unity/Level10.html" />
+<meta property="og:url" content="http://localhost:4000/writeups/CTF-DC32GameHacking/Unity/Level10.html" />
+<meta property="og:site_name" content="0xc4de.dev" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Level 10" />
+<script type="application/ld+json">
+{"url":"http://localhost:4000/writeups/CTF-DC32GameHacking/Unity/Level10.html","headline":"Level 10","@type":"WebPage","description":"Level 10 Level 10 is actually the easiest level if you’ve progressed linearly up to this point.","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="0xc4de.dev" /><link rel="shortcut icon" type="image/x-icon" href="" />
+  <link rel="stylesheet" href="/assets/css/main.css" />
+</head><body a="auto">
+    <main class="page-content" aria-label="Content">
+      <div class="w">
+        <h1 id="level-10">Level 10</h1>
+<p>Level 10 is actually the easiest level if you’ve progressed linearly up to this point.</p>
+
+<p>Assuming UnityExplorer is already installed, open the game, go to the menu and in the Object Explorer, you can use the box at the bottom that says <code class="language-plaintext highlighter-rouge">[Select a scene]</code>, this dropdown should have <code class="language-plaintext highlighter-rouge">Scene 10: hidden</code>, just click it and click <code class="language-plaintext highlighter-rouge">Load (Single)</code></p>
+
+<p>From here you should see a chest that is open with an “E” prompt. It has the <code class="language-plaintext highlighter-rouge">chest</code> script on it. And doesn’t open whenever you try to activate it.
+<img src="Images/Pasted image 20240820233745.png" alt="Image" /></p>
+
+<p>I wrote a weird solution to this completely on accident while trying to solve Level 8, in DNSpy I modified the chest class with the following:</p>
+<pre><code class="language-C#">public void Awake()
+{
+    this.chestObj.SetActive(false);
+	this.completionFeedbacks.PlayFeedbacks();
+	UnityEngine.Object.Instantiate&lt;GameObject&gt;(this.hiddenFlag, base.transform.position, Quaternion.identity);
+}
+</code></pre>
+
+<p>To quickly explain this: <code class="language-plaintext highlighter-rouge">Awake</code> is a <code class="language-plaintext highlighter-rouge">MonoBehavior</code> method that is called whenever an object “Wakes up” as in, when it is created within the scene. Since the chest is created on scene load, it will do what is inside of the method. The contents are ripped straight out of <code class="language-plaintext highlighter-rouge">OpenChest</code> and should just de-spawn the chest, and spawn the flag. I figured this would solve Level 8 before I even knew it didn’t use the <code class="language-plaintext highlighter-rouge">Chest</code> script, lucky for me this one does.</p>
+
+<p><img src="Images/Pasted image 20240820233613.png" alt="Image" /></p>
+
+<p><code class="language-plaintext highlighter-rouge">GHCTF{well_played_hacker_gg}</code></p>
+
+<p>And that’s the <a href="Secret!">end</a> of the main-level challenges of this segment of the CTF. Learning these was a LOT of fun, and I had a decent amount of difficulty in the start. Discounting the <a href="Level8#Unintended Solution (forbidden strategy)">Forbidden Strategy</a></p>
+
+<p>Anyhow, thanks for reading my writeups on the Unity section! I tried to make them a little more flowing towards how I was thinking, and tried to explain the things I did and why. I have a more personal style of writing because I think just going through things mechanically gets quite boring quite quickly. Hopefully that came off in the writing, or it didn’t.</p>
+
+      </div>
+    </main>
+  </body>
+</html>
