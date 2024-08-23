@@ -42,6 +42,7 @@ collections_dir: _collections
 remote_theme: riggraz/no-style-please
 plugins:
   - jekyll-feed
+  - no-date
 
 # Exclude from processing.
 # The following items will not be processed, by default.
