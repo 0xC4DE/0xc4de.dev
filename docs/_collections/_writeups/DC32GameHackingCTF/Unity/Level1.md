@@ -1,3 +1,7 @@
+---
+layout: writeup
+---
+
 # Level 1
 Level 1 was the warmup for the entire thing, it's the first level you launch into when you get into the game. Because I wasn't sure where to start I took a look at the guide & decided to download Cheat Engine.
 

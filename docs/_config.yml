@@ -33,7 +33,8 @@ collections:
     permalink: /writeups
 
     DC32GameHackingCTF:
-      output: true
+      Unity:
+        output: true
 
 collections_dir: _collections
 
