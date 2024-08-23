@@ -27,6 +27,17 @@ url: http://0xc4de.dev # the base hostname & protocol for your site, e.g. http:/
 twitter_username: "NotComptia"
 github_username:  "0xc4de"
 
+collections:
+  writeups:
+    output: true
+    permalink: /writeups
+
+    DC32GameHackingCTF:
+      output: true
+
+collections_dir: _collections
+
+
 # Build settings
 remote_theme: riggraz/no-style-please
 plugins:
