@@ -30,7 +30,7 @@ collections:
   writeups:
     output: true
   badge:
-    output; true
+    output: true
 
 
 # Build settings
