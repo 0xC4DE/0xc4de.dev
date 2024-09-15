@@ -29,6 +29,8 @@ collections_dir: _collections
 collections:
   writeups:
     output: true
+  badge:
+    output; true
 
 
 # Build settings
