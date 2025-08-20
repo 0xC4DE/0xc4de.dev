@@ -1,1 +1,0 @@
-Welcome to the images folder! Not sure why you're here maybe you want to [Go Back?](../README.md)

@@ -49,3 +49,12 @@ Yesterday, I announced that I am making a badge for the DC256 group (to the grou
 I have spent the past 3 weeks (As of September 15th) spending a LOT of freetime learning, designing the schematic, and creating the design for the PCB for this badge. I will spare the gorey detail of cerating the art, the backplane of the badge, and design especially since I am by no means an artist. What I will talk about is that the main part of the badge is based off the original art of the DC256 sticker and painstakingly traced by somebody who does not know how to create vector art. After hours of clicking, cutting, and overal tweaking with a LOT of frustration (ask my wife) I finally landed on a good enough design for a first-order and placed said order.
 
 As of now this is where this ends. Hope to have more updates when V1 shows up and even more after I start adding some features.. As of now I plan on making sure everything works, and doing a phase 2 with any new features that people express interest in. I hope you're here from the interest check, hello otherwise! 
+
+
+## August 10th (2025)
+
+Unfortunately, this project fell through. I'm leaving it here as a hidden monument to my failures. I will make another badge in the future, but this derailed me significantly, I wont lie.
+
+I think most of the failure here comes from my lack of pushing for it to happen, otherwise people would definitely have at least caught on, but it wouldn't have been anything special.
+
+Hopefully I will make a comeback with the DEFCON 34(!!) badge for Game Hacking Village that may or may not happen. It's literally in an ideas phase at this time.
